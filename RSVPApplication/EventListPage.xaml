@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="RSVPApplication.EventListPage">
 
-
     <ScrollView>
         <VerticalStackLayout
             Padding="30"
@@ -22,19 +21,19 @@
                 HorizontalTextAlignment="Center" />
 
             <Button
-                Text="Company Picnic - September 20"
+                Text="Richmond Food Truck Festival - October 17"
                 BackgroundColor="DarkBlue"
                 TextColor="White"
                 Clicked="OnEventOneClicked" />
 
             <Button
-                Text="Fall Festival - October 10"
+                Text="Fall Golf Tournament - November 7"
                 BackgroundColor="DarkBlue"
                 TextColor="White"
                 Clicked="OnEventTwoClicked" />
 
             <Button
-                Text="Holiday Party - December 15"
+                Text="Holiday Lights Night - December 12"
                 BackgroundColor="DarkBlue"
                 TextColor="White"
                 Clicked="OnEventThreeClicked" />
