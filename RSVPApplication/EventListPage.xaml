@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RSVPApplication.EventListPage">
+
+
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="30"
+            Spacing="15">
+
+            <Label
+                x:Name="PageTitleLabel"
+                Text="Events"
+                FontSize="30"
+                FontAttributes="Bold"
+                TextColor="DarkBlue"
+                HorizontalOptions="Center" />
+
+            <Label
+                Text="Select an event to view more information."
+                HorizontalTextAlignment="Center" />
+
+            <Button
+                Text="Company Picnic - September 20"
+                BackgroundColor="DarkBlue"
+                TextColor="White"
+                Clicked="OnEventOneClicked" />
+
+            <Button
+                Text="Fall Festival - October 10"
+                BackgroundColor="DarkBlue"
+                TextColor="White"
+                Clicked="OnEventTwoClicked" />
+
+            <Button
+                Text="Holiday Party - December 15"
+                BackgroundColor="DarkBlue"
+                TextColor="White"
+                Clicked="OnEventThreeClicked" />
+
+            <Button
+                Text="Go Back"
+                BackgroundColor="Gray"
+                TextColor="White"
+                Clicked="OnGoBackClicked" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

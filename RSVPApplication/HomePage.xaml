@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RSVPApplication.HomePage">
+
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="30"
+            Spacing="15">
+
+            <Label
+                Text="RSVP Application"
+                FontSize="30"
+                FontAttributes="Bold"
+                TextColor="DarkBlue"
+                HorizontalOptions="Center" />
+
+            <Label
+                Text="Events"
+                FontSize="22"
+                FontAttributes="Bold"
+                HorizontalOptions="Center" />
+
+            <Label
+                Text="Select an option below to view events or create a new event."
+                HorizontalTextAlignment="Center" />
+
+            <Button
+                Text="All Events"
+                BackgroundColor="DarkBlue"
+                TextColor="White"
+                Clicked="OnAllEventsClicked" />
+
+            <Button
+                Text="Events I'm Attending"
+                BackgroundColor="DarkBlue"
+                TextColor="White"
+                Clicked="OnAttendingEventsClicked" />
+
+            <Button
+                Text="Events I'm Hosting"
+                BackgroundColor="DarkBlue"
+                TextColor="White"
+                Clicked="OnHostingEventsClicked" />
+
+            <Button
+                Text="Add Event"
+                BackgroundColor="DarkBlue"
+                TextColor="White"
+                Clicked="OnAddEventClicked" />
+
+            <Button
+                Text="Logout"
+                BackgroundColor="Gray"
+                TextColor="White"
+                Clicked="OnLogoutClicked" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RSVPApplication.RSVPPage">
+
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="30"
+            Spacing="15">
+
+            <Label
+                Text="RSVP for Event"
+                FontSize="30"
+                FontAttributes="Bold"
+                TextColor="DarkBlue"
+                HorizontalOptions="Center" />
+
+            <Label
+                x:Name="EventNameLabel"
+                FontSize="20"
+                FontAttributes="Bold"
+                HorizontalOptions="Center" />
+
+            <Label
+                Text="First Name" />
+
+            <Entry
+                x:Name="FirstNameEntry"
+                Placeholder="Enter first name" />
+
+            <Label
+                Text="Last Name" />
+
+            <Entry
+                x:Name="LastNameEntry"
+                Placeholder="Enter last name" />
+
+            <Label
+                Text="Email" />
+
+            <Entry
+                x:Name="EmailEntry"
+                Placeholder="Enter email address"
+                Keyboard="Email" />
+
+            <Label
+                Text="Number of Guests" />
+
+            <Entry
+                x:Name="GuestCountEntry"
+                Placeholder="Enter number of guests"
+                Keyboard="Numeric" />
+
+            <Label
+                x:Name="MessageLabel"
+                TextColor="Red"
+                FontSize="14" />
+
+            <Button
+                Text="Submit RSVP"
+                BackgroundColor="DarkBlue"
+                TextColor="White"
+                Clicked="OnSubmitClicked" />
+
+            <Button
+                Text="Cancel"
+                BackgroundColor="Gray"
+                TextColor="White"
+                Clicked="OnCancelClicked" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
