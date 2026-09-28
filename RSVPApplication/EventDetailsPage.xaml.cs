@@ -1,29 +1,49 @@
-﻿namespace RSVPApplication
+﻿using RSVPApplication.Models;
+
+namespace RSVPApplication
 {
     public partial class EventDetailsPage : ContentPage
     {
-        private string selectedEventName;
+        private readonly Event selectedEvent;
+        private readonly User? currentUser;
 
         public EventDetailsPage(
-            string eventName,
-            string eventDate,
-            string eventLocation,
-            string eventDescription)
+            Event eventItem,
+            User? user = null)
         {
             InitializeComponent();
 
-            selectedEventName = eventName;
+            selectedEvent = eventItem;
+            currentUser = user;
 
-            EventNameLabel.Text = eventName;
-            EventDateLabel.Text = $"Date: {eventDate}";
-            EventLocationLabel.Text = $"Location: {eventLocation}";
-            EventDescriptionLabel.Text = $"Description: {eventDescription}";
+            EventNameLabel.Text = selectedEvent.EventName;
+
+            EventDateLabel.Text =
+                $"Date: {selectedEvent.EventDate:MMMM d, yyyy h:mm tt}";
+
+            EventLocationLabel.Text =
+                $"Location: {selectedEvent.Location}";
+
+            EventDescriptionLabel.Text =
+                $"Description: {selectedEvent.EventDescription}";
         }
 
         private async void OnRSVPClicked(object sender, EventArgs e)
         {
+            if (currentUser == null)
+            {
+                await DisplayAlert(
+                    "Login Required",
+                    "You must be logged in to RSVP to an event.",
+                    "OK");
+
+                return;
+            }
+
             await Navigation.PushAsync(
-                new RSVPPage(selectedEventName));
+                new RSVPPage(
+                    selectedEvent,
+                    currentUser));
         }
 
         private async void OnGoBackClicked(object sender, EventArgs e)

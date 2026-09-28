@@ -1,50 +1,85 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="RSVPApplication.EventListPage">
 
-    <ScrollView>
-        <VerticalStackLayout
-            Padding="30"
-            Spacing="15">
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="RSVPApplication.EventListPage">
 
-            <Label
-                x:Name="PageTitleLabel"
-                Text="Events"
-                FontSize="30"
-                FontAttributes="Bold"
-                TextColor="DarkBlue"
-                HorizontalOptions="Center" />
+    <Grid Padding="30"
+          RowDefinitions="Auto,Auto,*,Auto"
+          RowSpacing="15">
 
-            <Label
-                Text="Select an event to view more information."
-                HorizontalTextAlignment="Center" />
+        <Label
+            x:Name="PageTitleLabel"
+            Grid.Row="0"
+            Text="Events"
+            FontSize="30"
+            FontAttributes="Bold"
+            TextColor="DarkBlue"
+            HorizontalOptions="Center" />
 
-            <Button
-                Text="Richmond Food Truck Festival - October 17"
-                BackgroundColor="DarkBlue"
-                TextColor="White"
-                Clicked="OnEventOneClicked" />
+        <Label
+            Grid.Row="1"
+            Text="Select an event to view more information."
+            HorizontalTextAlignment="Center" />
 
-            <Button
-                Text="Fall Golf Tournament - November 7"
-                BackgroundColor="DarkBlue"
-                TextColor="White"
-                Clicked="OnEventTwoClicked" />
+        <CollectionView
+            x:Name="EventsCollectionView"
+            Grid.Row="2"
+            SelectionMode="Single"
+            SelectionChanged="OnEventSelected">
 
-            <Button
-                Text="Holiday Lights Night - December 12"
-                BackgroundColor="DarkBlue"
-                TextColor="White"
-                Clicked="OnEventThreeClicked" />
+            <CollectionView.EmptyView>
+                <Label
+                    Text="No events found."
+                    HorizontalTextAlignment="Center"
+                    VerticalOptions="Center"
+                    FontSize="18"
+                    TextColor="Gray" />
+            </CollectionView.EmptyView>
 
-            <Button
-                Text="Go Back"
-                BackgroundColor="Gray"
-                TextColor="White"
-                Clicked="OnGoBackClicked" />
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame
+                        Margin="0,5"
+                        Padding="15"
+                        BorderColor="DarkBlue"
+                        CornerRadius="8">
 
-        </VerticalStackLayout>
-    </ScrollView>
+                        <VerticalStackLayout Spacing="5">
+
+                            <Label
+                                Text="{Binding EventName}"
+                                FontSize="18"
+                                FontAttributes="Bold"
+                                TextColor="DarkBlue" />
+
+                            <Label
+                                Text="{Binding EventDate, StringFormat='Date: {0:MMMM d, yyyy h:mm tt}'}" />
+
+                            <Label
+                                Text="{Binding Location, StringFormat='Location: {0}'}" />
+
+                            <Label
+                                Text="{Binding EventDescription}"
+                                LineBreakMode="TailTruncation"
+                                MaxLines="2" />
+
+                        </VerticalStackLayout>
+
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+        </CollectionView>
+
+        <Button
+            Grid.Row="3"
+            Text="Go Back"
+            BackgroundColor="Gray"
+            TextColor="White"
+            Clicked="OnGoBackClicked" />
+
+    </Grid>
 
 </ContentPage>

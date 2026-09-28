@@ -1,18 +1,27 @@
-﻿namespace RSVPApplication
+﻿using RSVPApplication.DataAccess;
+using RSVPApplication.Models;
+
+namespace RSVPApplication
 {
     public partial class AddEventPage : ContentPage
     {
-        public AddEventPage()
+        private readonly DatabaseService databaseService;
+        private readonly User currentUser;
+
+        public AddEventPage(User user)
         {
             InitializeComponent();
+
+            currentUser = user;
+            databaseService = new DatabaseService();
         }
 
         private async void OnAddEventClicked(object sender, EventArgs e)
         {
-            string eventName = EventNameEntry.Text ?? "";
-            string eventDate = EventDateEntry.Text ?? "";
-            string eventLocation = EventLocationEntry.Text ?? "";
-            string eventDescription = EventDescriptionEditor.Text ?? "";
+            string eventName = EventNameEntry.Text?.Trim() ?? "";
+            string eventDate = EventDateEntry.Text?.Trim() ?? "";
+            string eventLocation = EventLocationEntry.Text?.Trim() ?? "";
+            string eventDescription = EventDescriptionEditor.Text?.Trim() ?? "";
 
             if (string.IsNullOrWhiteSpace(eventName) ||
                 string.IsNullOrWhiteSpace(eventDate) ||
@@ -23,11 +32,30 @@
                 return;
             }
 
+            if (!DateTime.TryParse(eventDate, out DateTime parsedDate))
+            {
+                MessageLabel.Text =
+                    "Please enter a valid date and time.";
+
+                return;
+            }
+
+            Event newEvent = new Event
+            {
+                EventName = eventName,
+                EventDate = parsedDate,
+                Location = eventLocation,
+                EventDescription = eventDescription,
+                HostUserId = currentUser.UserId
+            };
+
+            await databaseService.AddEventAsync(newEvent);
+
             MessageLabel.Text = "";
 
             await DisplayAlert(
                 "Event Added",
-                "All event information has been entered.",
+                "Your event has been saved successfully.",
                 "OK");
 
             await Navigation.PopAsync();

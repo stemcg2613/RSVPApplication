@@ -1,21 +1,31 @@
-﻿namespace RSVPApplication
+﻿using RSVPApplication.DataAccess;
+using RSVPApplication.Models;
+
+namespace RSVPApplication
 {
     public partial class CreateAccountPage : ContentPage
     {
+        private readonly DatabaseService databaseService;
+
         public CreateAccountPage()
         {
             InitializeComponent();
+
+            databaseService = new DatabaseService();
         }
 
         private async void OnCreateAccountClicked(object sender, EventArgs e)
         {
-            string firstName = FirstNameEntry.Text ?? "";
-            string lastName = LastNameEntry.Text ?? "";
-            string userName = NewUserNameEntry.Text ?? "";
+            string firstName = FirstNameEntry.Text?.Trim() ?? "";
+            string lastName = LastNameEntry.Text?.Trim() ?? "";
+            string email = EmailEntry.Text?.Trim() ?? "";
+            string userName = NewUserNameEntry.Text?.Trim() ?? "";
             string password = NewPasswordEntry.Text ?? "";
 
+            
             if (string.IsNullOrWhiteSpace(firstName) ||
                 string.IsNullOrWhiteSpace(lastName) ||
+                string.IsNullOrWhiteSpace(email) ||
                 string.IsNullOrWhiteSpace(userName) ||
                 string.IsNullOrWhiteSpace(password))
             {
@@ -23,14 +33,33 @@
                 return;
             }
 
-            MessageLabel.Text = "";
+            User newUser = new User
+            {
+                FirstName = firstName,
+                LastName = lastName,
+                Email = email,
+                Username = userName,
+                Password = password
+            };
 
-            await DisplayAlert(
-                "Account Created",
-                "Your account has been created successfully.",
-                "OK");
+            try
+            {
+                await databaseService.AddUserAsync(newUser);
 
-            await Navigation.PopAsync();
+                MessageLabel.Text = "";
+
+                await DisplayAlert(
+                    "Account Created",
+                    "Your account has been created successfully.",
+                    "OK");
+
+                await Navigation.PopAsync();
+            }
+            catch (SQLite.SQLiteException)
+            {
+                MessageLabel.Text =
+                    "That username is already being used. Please choose another username.";
+            }
         }
 
         private async void OnCancelClicked(object sender, EventArgs e)
