@@ -12,5 +12,7 @@ namespace RSVPApplication.Models
         public int EventId { get; set; }
 
         public string Status { get; set; } = string.Empty;
+
+        public int GuestCount { get; set; }
     }
 }

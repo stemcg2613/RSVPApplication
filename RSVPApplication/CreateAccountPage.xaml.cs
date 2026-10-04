@@ -19,13 +19,14 @@ namespace RSVPApplication
             string firstName = FirstNameEntry.Text?.Trim() ?? "";
             string lastName = LastNameEntry.Text?.Trim() ?? "";
             string email = EmailEntry.Text?.Trim() ?? "";
+            string mobilePhone = MobilePhoneEntry.Text?.Trim() ?? "";
             string userName = NewUserNameEntry.Text?.Trim() ?? "";
             string password = NewPasswordEntry.Text ?? "";
 
-            
             if (string.IsNullOrWhiteSpace(firstName) ||
                 string.IsNullOrWhiteSpace(lastName) ||
                 string.IsNullOrWhiteSpace(email) ||
+                string.IsNullOrWhiteSpace(mobilePhone) ||
                 string.IsNullOrWhiteSpace(userName) ||
                 string.IsNullOrWhiteSpace(password))
             {
@@ -38,6 +39,7 @@ namespace RSVPApplication
                 FirstName = firstName,
                 LastName = lastName,
                 Email = email,
+                MobilePhone = mobilePhone,
                 Username = userName,
                 Password = password
             };

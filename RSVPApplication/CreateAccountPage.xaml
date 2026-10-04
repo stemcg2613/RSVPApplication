@@ -40,6 +40,14 @@
                 Keyboard="Email" />
 
             <Label
+                Text="Mobile Phone Number" />
+
+            <Entry
+                x:Name="MobilePhoneEntry"
+                Placeholder="Enter mobile phone number"
+                Keyboard="Telephone" />
+
+            <Label
                 Text="Username" />
 
             <Entry

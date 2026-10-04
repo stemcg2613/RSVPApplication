@@ -55,7 +55,8 @@ namespace RSVPApplication
             {
                 UserId = currentUser.UserId,
                 EventId = selectedEvent.EventId,
-                Status = "Attending"
+                Status = "Attending",
+                GuestCount = guestCount
             };
 
             await databaseService.AddRSVPAsync(newRSVP);
