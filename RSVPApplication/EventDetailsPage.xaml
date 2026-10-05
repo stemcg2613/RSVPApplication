@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="RSVPApplication.EventDetailsPage">
 
-
     <ScrollView>
         <VerticalStackLayout
             Padding="30"
@@ -23,6 +22,10 @@
                 HorizontalOptions="Center" />
 
             <Label
+                x:Name="HostNameLabel"
+                FontSize="16" />
+
+            <Label
                 x:Name="EventDateLabel"
                 FontSize="16" />
 
@@ -31,7 +34,34 @@
                 FontSize="16" />
 
             <Label
+                x:Name="MaximumAttendeesLabel"
+                FontSize="16" />
+
+            <Label
+                x:Name="CurrentAttendeesLabel"
+                FontSize="16" />
+
+            <Label
+                x:Name="RSVPDeadlineLabel"
+                FontSize="16" />
+
+            <Label
+                Text="Description:"
+                FontSize="16"
+                FontAttributes="Bold" />
+
+            <Label
                 x:Name="EventDescriptionLabel"
+                FontSize="16" />
+
+            <Label
+                Text="Attendees:"
+                FontSize="18"
+                FontAttributes="Bold"
+                TextColor="DarkBlue" />
+
+            <Label
+                x:Name="AttendeeNamesLabel"
                 FontSize="16" />
 
             <Button

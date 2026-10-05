@@ -17,10 +17,8 @@ namespace RSVPApplication
             currentUser = user;
             databaseService = new DatabaseService();
 
-            // Display the selected event
             EventNameLabel.Text = selectedEvent.EventName;
 
-            // Prepopulate the logged-in user's information
             FirstNameEntry.Text = currentUser.FirstName;
             LastNameEntry.Text = currentUser.LastName;
             EmailEntry.Text = currentUser.Email;
@@ -47,6 +45,73 @@ namespace RSVPApplication
             {
                 MessageLabel.Text =
                     "Please enter a valid number of guests.";
+                return;
+            }
+
+            // Check RSVP deadline
+            if (selectedEvent.RSVPDeadline != default &&
+                DateTime.Now > selectedEvent.RSVPDeadline)
+            {
+                MessageLabel.Text =
+                    "The RSVP deadline for this event has passed.";
+
+                await DisplayAlert(
+                    "RSVP Closed",
+                    "The RSVP deadline for this event has passed.",
+                    "OK");
+
+                return;
+            }
+
+            var rsvps = await databaseService.GetRSVPsAsync();
+
+            // Check for duplicate RSVP
+            bool alreadyRSVPd = rsvps.Any(r =>
+                r.UserId == currentUser.UserId &&
+                r.EventId == selectedEvent.EventId &&
+                r.Status == "Attending");
+
+            if (alreadyRSVPd)
+            {
+                MessageLabel.Text =
+                    "You have already RSVP'd to this event.";
+
+                await DisplayAlert(
+                    "Duplicate RSVP",
+                    "You have already RSVP'd to this event.",
+                    "OK");
+
+                return;
+            }
+
+            // Calculate current attendance.
+            // Each RSVP includes the registered user plus their guests.
+            int currentAttendance = rsvps
+                .Where(r =>
+                    r.EventId == selectedEvent.EventId &&
+                    r.Status == "Attending")
+                .Sum(r => 1 + r.GuestCount);
+
+            int requestedAttendance = 1 + guestCount;
+
+            // Check maximum attendance
+            if (selectedEvent.MaximumAttendees > 0 &&
+                currentAttendance + requestedAttendance >
+                selectedEvent.MaximumAttendees)
+            {
+                int remainingSpots =
+                    Math.Max(
+                        0,
+                        selectedEvent.MaximumAttendees -
+                        currentAttendance);
+
+                MessageLabel.Text =
+                    $"Not enough space. Only {remainingSpots} spot(s) remain.";
+
+                await DisplayAlert(
+                    "Event Full",
+                    $"Only {remainingSpots} spot(s) remain for this event.",
+                    "OK");
 
                 return;
             }

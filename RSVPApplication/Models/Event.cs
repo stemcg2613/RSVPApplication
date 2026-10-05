@@ -19,5 +19,9 @@ namespace RSVPApplication.Models
         public string Location { get; set; } = string.Empty;
 
         public int HostUserId { get; set; }
+
+        public int MaximumAttendees { get; set; }
+
+        public DateTime RSVPDeadline { get; set; }
     }
 }

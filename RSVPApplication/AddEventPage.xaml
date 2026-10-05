@@ -15,29 +15,38 @@
                 TextColor="DarkBlue"
                 HorizontalOptions="Center" />
 
-            <Label
-                Text="Event Name" />
+            <Label Text="Event Name" />
 
             <Entry
                 x:Name="EventNameEntry"
                 Placeholder="Enter event name" />
 
-            <Label
-                Text="Date and Time" />
+            <Label Text="Date and Time" />
 
             <Entry
                 x:Name="EventDateEntry"
                 Placeholder="Enter date and time" />
 
-            <Label
-                Text="Location" />
+            <Label Text="Location" />
 
             <Entry
                 x:Name="EventLocationEntry"
                 Placeholder="Enter event location" />
 
-            <Label
-                Text="Description" />
+            <Label Text="Maximum Allowed Attendees" />
+
+            <Entry
+                x:Name="MaximumAttendeesEntry"
+                Placeholder="Enter maximum attendees"
+                Keyboard="Numeric" />
+
+            <Label Text="RSVP Deadline" />
+
+            <Entry
+                x:Name="RSVPDeadlineEntry"
+                Placeholder="Enter RSVP deadline date and time" />
+
+            <Label Text="Description" />
 
             <Editor
                 x:Name="EventDescriptionEditor"
